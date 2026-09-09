@@ -11,7 +11,7 @@ ShowDesktop macOS işletim sistemlerinde masaüstüne kolay geçişi hedeflemiş
 
 ## Sürüm durumu
 
-0.1.1, erken erişim sürümüdür. Temel küçült/geri getir, kısayol, önceden küçültülmüş pencerelerin korunması, Dock'tan elle açılmış pencere sonrası geri getirme ve kapatılan uygulama sonrası devam etme testleri geçti. Yanıt vermeyen uygulama ve geri getirme listesini sıfırlama akışlarının manuel doğrulaması bekliyor. Otomatik testler: 10 başarılı test.
+0.1.1, Apple Silicon için notarized public release sürümüdür. Temel küçült/geri getir, kısayol, önceden küçültülmüş pencerelerin korunması, Dock'tan elle açılmış pencere sonrası geri getirme ve kapatılan uygulama sonrası devam etme testleri geçti. Otomatik testler: 10 başarılı test.
 
 ## Kurulum
 
@@ -73,4 +73,4 @@ zsh Scripts/build-app.sh
 
 ## Lisans
 
-Bu proje için henüz bir lisans seçilmedi. Lisans dosyası eklenene kadar kaynak kodun yeniden kullanımı veya dağıtımı için açık bir izin verilmiş sayılmaz.
+Bu proje [MIT License](LICENSE) ile lisanslanmıştır.
