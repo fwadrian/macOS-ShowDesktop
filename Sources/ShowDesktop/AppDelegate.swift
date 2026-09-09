@@ -34,21 +34,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         button.sendAction(on: [.leftMouseUp, .rightMouseUp])
     }
 
-    private static let desktopImage = makeTemplateImage(
+    private static let desktopImage = makeWhiteImage(
         named: "rectangle.on.rectangle.slash",
         description: "Masaüstünü göster"
     )
 
-    private static let restoreImage = makeTemplateImage(
+    private static let restoreImage = makeWhiteImage(
         named: "rectangle.stack",
         description: "Pencereleri geri getir"
     )
 
-    private static func makeTemplateImage(named name: String, description: String) -> NSImage? {
-        guard let image = NSImage(systemSymbolName: name, accessibilityDescription: description) else {
+    private static func makeWhiteImage(named name: String, description: String) -> NSImage? {
+        guard let source = NSImage(systemSymbolName: name, accessibilityDescription: description),
+              let image = source.withSymbolConfiguration(
+                  NSImage.SymbolConfiguration(paletteColors: [.white])
+              ) else {
             return nil
         }
-        image.isTemplate = true
+        image.isTemplate = false
         return image
     }
 
