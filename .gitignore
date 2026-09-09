@@ -1,0 +1,14 @@
+.DS_Store
+.build/
+.swiftpm/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+dist/
+AGENTS.md
+PROJECT-STATUS.md
+Resources/AppIcon.iconset/
+
+# Private review notes and local publication staging
+CODE-AUDIT-REPORT.md
+.release-staging/
