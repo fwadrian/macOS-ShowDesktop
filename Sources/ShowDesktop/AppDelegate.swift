@@ -34,15 +34,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         button.sendAction(on: [.leftMouseUp, .rightMouseUp])
     }
 
-    private static let desktopImage = NSImage(
-        systemSymbolName: "rectangle.on.rectangle.slash",
-        accessibilityDescription: "Masaüstünü göster"
+    private static let desktopImage = makeTemplateImage(
+        named: "rectangle.on.rectangle.slash",
+        description: "Masaüstünü göster"
     )
 
-    private static let restoreImage = NSImage(
-        systemSymbolName: "rectangle.stack",
-        accessibilityDescription: "Pencereleri geri getir"
+    private static let restoreImage = makeTemplateImage(
+        named: "rectangle.stack",
+        description: "Pencereleri geri getir"
     )
+
+    private static func makeTemplateImage(named name: String, description: String) -> NSImage? {
+        guard let image = NSImage(systemSymbolName: name, accessibilityDescription: description) else {
+            return nil
+        }
+        image.isTemplate = true
+        return image
+    }
 
     private var desktopImage: NSImage? {
         Self.desktopImage

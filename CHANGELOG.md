@@ -10,5 +10,6 @@
 - Uyarılar uygulama aktive edildikten sonra açılıyor.
 - Varsayılan kısayol tanımı merkezileştirildi.
 - Geri getirme kayıtları için üç regresyon testi eklendi; toplam 10 test geçti.
+- Menü çubuğu sembolleri template image olarak ayarlanarak beyaz görünüm düzeltildi.
 
 Apple Silicon için notarized public release.
