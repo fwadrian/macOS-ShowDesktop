@@ -50,7 +50,7 @@ Menüden uygulama hariç tutma, kısayol değiştirme ve girişte başlatma ayar
 swift test
 ```
 
-Gerçek pencere davranışı için [MANUAL-TEST-CHECKLIST.md](MANUAL-TEST-CHECKLIST.md) dosyasındaki senaryoları uygulayın.
+Gerçek pencere davranışı için macOS Accessibility izni verilmiş bir sistemde manuel test yapılmalıdır.
 
 ## Release
 
@@ -62,7 +62,7 @@ SHOWDESKTOP_BUNDLE_IDENTIFIER="com.example.ShowDesktop" \
 zsh Scripts/build-app.sh
 ```
 
-İmzalama, notarization ve dağıtım adımları için [RELEASING.md](RELEASING.md) dosyasına bakın.
+Notarization ve dağıtım kimlik bilgilerini proje dosyalarına eklemeyin; bunları macOS Keychain veya güvenli CI secret deposunda tutun.
 
 ## Proje yapısı
 
