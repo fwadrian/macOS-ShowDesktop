@@ -9,7 +9,6 @@ struct OperationResult {
     var pending = 0
 }
 
-// Access exclusively from AppDelegate's serial window queue.
 final class WindowManager {
     private struct StoredWindow {
         let element: AXUIElement
@@ -19,7 +18,6 @@ final class WindowManager {
 
     private var minimizedWindows = RestorationTracker<StoredWindow>()
 
-    // Per-object timeout also covers stored window references during restore.
     private let messagingTimeout: Float = 1.0
 
     func discardStoredWindows() {
@@ -50,8 +48,6 @@ final class WindowManager {
 
             for case let window as AXUIElement in windowArray {
                 AXUIElementSetMessagingTimeout(window, messagingTimeout)
-                // Önce mevcut durumu okuyarak zaten küçültülmüş pencerelerde
-                // ek bir settable AX çağrısı ve olası timeout oluşmasını önle.
                 guard let minimized = isMinimized(window), !minimized,
                       canMinimize(window) else { continue }
 
@@ -72,8 +68,8 @@ final class WindowManager {
                 } else {
                     summary.failed += 1
                     NSLog(
-                        "ShowDesktop: %@ (%@) penceresi küçültülemedi (AXError: %d)",
-                        app.localizedName ?? "Bilinmeyen uygulama",
+                        "ShowDesktop: could not minimize a window in %@ (%@) (AXError: %d)",
+                        app.localizedName ?? "Unknown application",
                         bundleIdentifier,
                         result.rawValue
                     )
@@ -97,7 +93,7 @@ final class WindowManager {
             )
             if result == .invalidUIElement || result == .noValue { return .unavailable }
             if result == .success { return .restored }
-            NSLog("ShowDesktop: %@ penceresi geri getirilemedi (AXError: %d)",
+            NSLog("ShowDesktop: could not restore a window in %@ (AXError: %d)",
                   storedWindow.applicationName, result.rawValue)
             return .failed
         }

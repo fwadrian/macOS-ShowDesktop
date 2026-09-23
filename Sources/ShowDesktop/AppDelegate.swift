@@ -19,16 +19,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         hotKeyManager = HotKeyManager(configuration: selectedHotKeyConfiguration) { [weak self] in self?.toggleDesktop() }
 
         if hotKeyManager?.isRegistered == false {
-            NSLog("ShowDesktop: ⌥ Space kısayolu kullanılamıyor.")
+            NSLog("ShowDesktop: ⌥ Space shortcut is unavailable.")
         }
     }
 
     private func configureStatusItem() {
         guard let button = statusItem.button else { return }
         button.image = desktopImage
-        // Keep the menu bar icon white for the current release artwork.
         button.contentTintColor = .white
-        button.toolTip = "ShowDesktop — Tıkla: küçült / geri getir"
+        button.toolTip = "ShowDesktop — Click: minimize / restore"
         button.target = self
         button.action = #selector(statusItemClicked(_:))
         button.sendAction(on: [.leftMouseUp, .rightMouseUp])
@@ -36,12 +35,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private static let desktopImage = makeWhiteImage(
         named: "rectangle.on.rectangle.slash",
-        description: "Masaüstünü göster"
+        description: "Show desktop"
     )
 
     private static let restoreImage = makeWhiteImage(
         named: "rectangle.stack",
-        description: "Pencereleri geri getir"
+        description: "Restore windows"
     )
 
     private static func makeWhiteImage(named name: String, description: String) -> NSImage? {
@@ -84,7 +83,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let restoring = pendingWindowCount > 0
         let applications = NSWorkspace.shared.runningApplications
         let exclusions = preferences.excludedBundleIdentifiers
-        statusItem.button?.toolTip = "ShowDesktop — İşlem sürüyor…"
+        statusItem.button?.toolTip = "ShowDesktop — Operation in progress…"
         windowQueue.async { [self] in
             let result = restoring
                 ? windowManager.restoreWindows()
@@ -95,27 +94,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 isToggling = false
                 statusItem.button?.image = result.pending > 0 ? restoreImage : desktopImage
                 if restoring {
-                    statusItem.button?.toolTip = "ShowDesktop — \(result.succeeded) geri getirildi, \(result.alreadyOpen) zaten açık, \(result.unavailable) artık mevcut değil, \(result.failed) bekliyor"
+                    statusItem.button?.toolTip = "ShowDesktop — \(result.succeeded) restored, \(result.alreadyOpen) already open, \(result.unavailable) no longer available, \(result.failed) pending"
                     if restoreFailed {
-                        statusItem.button?.toolTip = (statusItem.button?.toolTip ?? "") + "; yeniden denemek için tıkla veya sağ tık menüsünden listeyi sıfırla"
+                        statusItem.button?.toolTip = (statusItem.button?.toolTip ?? "") + "; click to retry or reset the list from the context menu"
                     }
                 } else {
-                    statusItem.button?.toolTip = "ShowDesktop — \(result.succeeded) küçültüldü, \(result.failed) başarısız oldu"
+                    statusItem.button?.toolTip = "ShowDesktop — \(result.succeeded) minimized, \(result.failed) failed"
                 }
             }
         }
     }
 
     @objc private func resetRestoreList() {
-        // Bekleyen kayıtlar, hata bayrağı oluşmasa bile temizlenebilmelidir
-        // (ör. pencerenin ait olduğu uygulama kapanmışsa).
         guard !isToggling, pendingWindowCount > 0 else { return }
         isToggling = true
         let alert = NSAlert()
-        alert.messageText = "Geri getirme listesi sıfırlansın mı?"
-        alert.informativeText = "Bekleyen \(pendingWindowCount) pencere otomatik geri getirilmeyecek. Dock'ta kalan pencereleri kendiniz açabilirsiniz. Sonraki tıklama yeni bir küçültme işlemi başlatır."
-        alert.addButton(withTitle: "Vazgeç")
-        alert.addButton(withTitle: "Listeyi Sıfırla")
+        alert.messageText = "Reset the restore list?"
+        alert.informativeText = "The \(pendingWindowCount) pending window(s) will not be restored automatically. You can open remaining windows from the Dock. The next click starts a new minimize operation."
+        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: "Reset List")
         guard presentAlert(alert) == .alertSecondButtonReturn else {
             isToggling = false
             return
@@ -127,7 +124,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 restoreFailed = false
                 isToggling = false
                 statusItem.button?.image = desktopImage
-                statusItem.button?.toolTip = "ShowDesktop — Liste sıfırlandı; tıkla: küçült"
+                statusItem.button?.toolTip = "ShowDesktop — List reset; click to minimize"
             }
         }
     }
@@ -147,10 +144,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func showPermissionAlert() {
         let alert = NSAlert()
-        alert.messageText = "Erişilebilirlik izni gerekiyor"
-        alert.informativeText = "ShowDesktop'un pencereleri küçültebilmesi için Sistem Ayarları > Gizlilik ve Güvenlik > Erişilebilirlik bölümünden izin verin."
-        alert.addButton(withTitle: "Ayarları Aç")
-        alert.addButton(withTitle: "Vazgeç")
+        alert.messageText = "Accessibility permission required"
+        alert.informativeText = "Allow ShowDesktop to control windows in System Settings > Privacy & Security > Accessibility."
+        alert.addButton(withTitle: "Open Settings")
+        alert.addButton(withTitle: "Cancel")
 
         if presentAlert(alert) == .alertFirstButtonReturn {
             openAccessibilitySettings()
@@ -161,14 +158,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let menu = NSMenu()
         menu.autoenablesItems = false
         let permissionText = AXIsProcessTrusted()
-            ? "Erişilebilirlik: Açık"
-            : "Erişilebilirlik: Kapalı"
+            ? "Accessibility: Enabled"
+            : "Accessibility: Disabled"
         let permissionItem = NSMenuItem(title: permissionText, action: nil, keyEquivalent: "")
         permissionItem.isEnabled = false
         menu.addItem(permissionItem)
 
         let toggleItem = NSMenuItem(
-            title: "Pencereleri küçült / geri getir",
+            title: "Minimize / restore windows",
             action: #selector(menuToggle),
             keyEquivalent: ""
         )
@@ -176,22 +173,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         toggleItem.target = self
         menu.addItem(toggleItem)
         if pendingWindowCount > 0 {
-            let resetItem = NSMenuItem(title: "Geri getirme listesini sıfırla…", action: #selector(resetRestoreList), keyEquivalent: "")
+            let resetItem = NSMenuItem(title: "Reset restore list…", action: #selector(resetRestoreList), keyEquivalent: "")
             resetItem.target = self
             resetItem.isEnabled = !isToggling
             menu.addItem(resetItem)
         }
 
-        let excludedAppsItem = NSMenuItem(title: "Hariç tutulan uygulamalar", action: nil, keyEquivalent: "")
+        let excludedAppsItem = NSMenuItem(title: "Excluded applications", action: nil, keyEquivalent: "")
         excludedAppsItem.submenu = makeExcludedAppsMenu()
         menu.addItem(excludedAppsItem)
 
-        let hotKeyItem = NSMenuItem(title: "Klavye kısayolu", action: nil, keyEquivalent: "")
+        let hotKeyItem = NSMenuItem(title: "Keyboard shortcut", action: nil, keyEquivalent: "")
         hotKeyItem.submenu = makeHotKeyMenu()
         menu.addItem(hotKeyItem)
 
         let launchAtLoginItem = NSMenuItem(
-            title: "Girişte başlat",
+            title: "Launch at login",
             action: #selector(toggleLaunchAtLogin(_:)),
             keyEquivalent: ""
         )
@@ -200,7 +197,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(launchAtLoginItem)
 
         let settingsItem = NSMenuItem(
-            title: "Erişilebilirlik ayarlarını aç",
+            title: "Open Accessibility settings",
             action: #selector(openAccessibilitySettings),
             keyEquivalent: ""
         )
@@ -209,7 +206,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(.separator())
 
         let quitItem = NSMenuItem(
-            title: "ShowDesktop'tan Çık",
+            title: "Quit ShowDesktop",
             action: #selector(quit),
             keyEquivalent: "q"
         )
@@ -247,7 +244,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             .sorted { (appNamesByBundleIdentifier[$0] ?? $0) < (appNamesByBundleIdentifier[$1] ?? $1) }
 
         if bundleIdentifiers.isEmpty {
-            let emptyItem = NSMenuItem(title: "Çalışan uygulama yok", action: nil, keyEquivalent: "")
+            let emptyItem = NSMenuItem(title: "No running applications", action: nil, keyEquivalent: "")
             emptyItem.isEnabled = false
             submenu.addItem(emptyItem)
             return submenu
@@ -311,9 +308,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func showHotKeyRegistrationError(_ configuration: HotKeyConfiguration) {
         let alert = NSAlert()
-        alert.messageText = "Kısayol kullanılamıyor"
-        alert.informativeText = "\(configuration.title) başka bir uygulama veya macOS tarafından kullanılıyor olabilir. Önceki kısayol korunuyor."
-        alert.addButton(withTitle: "Tamam")
+        alert.messageText = "Shortcut unavailable"
+        alert.informativeText = "\(configuration.title) may already be used by another application or macOS. The previous shortcut has been kept."
+        alert.addButton(withTitle: "OK")
         presentAlert(alert)
     }
 
@@ -325,16 +322,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 try SMAppService.mainApp.register()
             }
         } catch {
-            NSLog("ShowDesktop: girişte başlatma ayarı değiştirilemedi: %@", error.localizedDescription)
+            NSLog("ShowDesktop: could not change launch-at-login setting: %@", error.localizedDescription)
             showLaunchAtLoginError(error)
         }
     }
 
     private func showLaunchAtLoginError(_ error: Error) {
         let alert = NSAlert()
-        alert.messageText = "Girişte başlatma ayarlanamadı"
-        alert.informativeText = "macOS ShowDesktop'un oturum açılışında çalışmasını değiştiremedi: \(error.localizedDescription)"
-        alert.addButton(withTitle: "Tamam")
+        alert.messageText = "Could not configure launch at login"
+        alert.informativeText = "macOS could not change whether ShowDesktop starts at login: \(error.localizedDescription)"
+        alert.addButton(withTitle: "OK")
         presentAlert(alert)
     }
 

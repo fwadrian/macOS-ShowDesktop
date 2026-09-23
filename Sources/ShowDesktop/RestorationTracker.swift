@@ -1,5 +1,3 @@
-// Owns only windows successfully minimized by ShowDesktop. Failed restores stay
-// tracked until they succeed, disappear, or the user explicitly discards them.
 struct RestorationTracker<Window> {
     enum Outcome { case restored, alreadyOpen, unavailable, failed }
     private var windows: [Window] = []

@@ -5,28 +5,32 @@ set -euo pipefail
 project_root="${0:A:h}/.."
 cd "$project_root"
 
-swift build -c release --product ShowDesktop
-binary_path="$(swift build -c release --show-bin-path)/ShowDesktop"
+archive_path="$project_root/dist/ShowDesktop.xcarchive"
 app_bundle="$project_root/dist/ShowDesktop.app"
 signing_identity="${SHOWDESKTOP_SIGNING_IDENTITY:-}"
 bundle_identifier="${SHOWDESKTOP_BUNDLE_IDENTIFIER:-com.example.ShowDesktop}"
 
 if [[ -z "$signing_identity" ]]; then
-    echo "Hata: SHOWDESKTOP_SIGNING_IDENTITY ortam değişkeni ayarlanmalı." >&2
-    echo "Örnek: SHOWDESKTOP_SIGNING_IDENTITY=\"Developer ID Application: ...\" zsh Scripts/build-app.sh" >&2
+    echo "Error: SHOWDESKTOP_SIGNING_IDENTITY must be set." >&2
+    echo "Example: SHOWDESKTOP_SIGNING_IDENTITY=\"Developer ID Application: ...\" zsh Scripts/build-app.sh" >&2
     exit 1
 fi
 
-mkdir -p "$app_bundle/Contents/MacOS" "$app_bundle/Contents/Resources"
-cp "$binary_path" "$app_bundle/Contents/MacOS/ShowDesktop"
-# Remove compiler debug paths before signing a public distribution.
-xcrun strip -S "$app_bundle/Contents/MacOS/ShowDesktop"
-cp "$project_root/Resources/Info.plist" "$app_bundle/Contents/Info.plist"
-cp "$project_root/Resources/AppIconSource.png" "$app_bundle/Contents/Resources/AppIcon.png"
-plutil -replace CFBundleIdentifier -string "$bundle_identifier" "$app_bundle/Contents/Info.plist"
+xcodebuild \
+    -project "$project_root/ShowDesktop.xcodeproj" \
+    -scheme ShowDesktop \
+    -configuration Release \
+    -archivePath "$archive_path" \
+    archive \
+    CODE_SIGNING_ALLOWED=NO \
+    CODE_SIGNING_REQUIRED=NO \
+    CODE_SIGN_IDENTITY= \
+    DEVELOPMENT_TEAM= \
+    PRODUCT_BUNDLE_IDENTIFIER="$bundle_identifier"
 
-# This bundle contains a single executable; sign the outer bundle directly.
-# Apple advises against --deep during signing because it can mask nested-signature issues.
+rm -rf "$app_bundle"
+ditto "$archive_path/Products/Applications/ShowDesktop.app" "$app_bundle"
 codesign --force --options runtime --timestamp --sign "$signing_identity" "$app_bundle"
-echo "Uygulama oluşturuldu: $app_bundle"
-echo "İmzalama kimliği: $signing_identity"
+codesign --verify --deep --strict "$app_bundle"
+echo "Application built and signed: $app_bundle"
+echo "Signing identity: $signing_identity"

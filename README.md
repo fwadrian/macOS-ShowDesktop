@@ -1,60 +1,60 @@
 # ShowDesktop
 
-ShowDesktop macOS işletim sistemlerinde masaüstüne kolay geçişi hedeflemiş, son derece hafif çalışan ve tek tık ile tüm uygulamaları minimize etmenizi sağlayan yardımcınızdır. ShowDesktop, macOS'ta açık uygulama pencerelerini tek tıklama veya `⌥ Space` kısayoluyla Dock'a küçültür. İkinci kullanımda yalnızca ShowDesktop'un küçülttüğü pencereleri geri getirir. Üstelik bunu yaparken istediğiniz uygulamanın ekranda kalmasını da sağlayabilir.
+ShowDesktop is a lightweight macOS menu bar utility that minimizes open application windows to the Dock with one click or the `Option-Space` shortcut. The next activation restores only the windows minimized by ShowDesktop, while leaving windows already minimized by the user untouched.
 
-## Gereksinimler
+## Requirements
 
-- macOS 13 veya üzeri
-- Hazır 0.1.1 paketi için Apple Silicon (arm64) Mac
-- Kaynaktan derlemek için Xcode 15 veya üzeri
-- Pencere yönetimi için Accessibility izni
+- macOS 13 or later
+- Apple Silicon or Intel Mac for the prebuilt universal package
+- Xcode 15 or later to build from source
+- Accessibility permission for window management
 
-## Sürüm durumu
+## Release Status
 
-0.1.1, Apple Silicon için notarized public release sürümüdür. Temel küçült/geri getir, kısayol, önceden küçültülmüş pencerelerin korunması, Dock'tan elle açılmış pencere sonrası geri getirme ve kapatılan uygulama sonrası devam etme testleri geçti. Otomatik testler: 10 başarılı test.
+Version 0.1.1 is a Developer ID-signed universal release candidate. Apple notarization is in progress. Core minimize and restore behavior, shortcut handling, protection of already minimized windows, restoring a window opened from the Dock, and continuing after an application closes have been tested successfully. Ten automated tests pass.
 
-## Kurulum
+## Installation
 
-Yayınlanan DMG içindeki ShowDesktop uygulamasını Applications klasörüne taşıyın. Güncellemeden önce çalışan ShowDesktop'tan sağ tık menüsüyle çıkın; ardından Applications içindeki yeni sürümü açın. Erişilebilirlik izni gerektiğinde Sistem Ayarları > Gizlilik ve Güvenlik > Erişilebilirlik bölümünü kullanın.
+Move ShowDesktop from the published DMG to the Applications folder. Quit any running version from the context menu before updating, then open the new version. If prompted, enable Accessibility permission in System Settings > Privacy & Security > Accessibility.
 
-## Gizlilik
+## Privacy
 
-Uygulamada hesap, reklam, analiz veya uygulama içi ağ isteği bulunmaz. Pencereleri yönetmek için macOS Accessibility API kullanılır. Hariç tutulan uygulamalar ve kısayol tercihi cihazdaki UserDefaults içinde saklanır. Hata günlükleri yerel sistem günlüğüne uygulama adı, bundle kimliği ve hata kodu yazabilir. Hata raporu paylaşırken kişisel bilgileri kaldırın.
+The application has no account system, advertising, analytics, or in-app network requests. It uses the macOS Accessibility API to manage windows. Excluded applications and shortcut preferences are stored locally in UserDefaults. Error logs may include application names, bundle identifiers, and error codes in the local system log.
 
-## Bilinen sınırlar
+## Known Limitations
 
-- Tam ekran veya küçültmeyi desteklemeyen özel pencereler etkilenmeyebilir.
-- ShowDesktop kapatılırsa geri getirme listesi kaybolur; pencereler Dock'tan açılabilir.
-- İşlem devam ederken gelen yeni toggle istekleri yok sayılır.
-- Geri getirme hatasında kayıtlar korunur. Tekrar tıklama yeniden dener; sağ tık menüsündeki liste sıfırlama seçeneği bu kayıtları açık onayla unutur.
-- Hazır paket Apple Silicon içindir; Intel ve tüm desteklenen macOS sürümleri üzerinde doğrulama yapılmadı.
-- Bu dağıtım Mac App Store yayını değildir.
+- Full-screen or non-minimizable custom windows may be unaffected.
+- The restore list is lost when ShowDesktop quits; windows can still be opened from the Dock.
+- Toggle requests received while an operation is running are ignored.
+- Failed restores remain pending for another attempt until the list is explicitly reset.
+- The prebuilt package is universal; Intel and every supported macOS version have not been independently verified.
+- This distribution is not a Mac App Store release.
 
-## Geliştirme
+## Development
 
-Projeyi klonladıktan sonra `Package.swift` dosyasını Xcode ile açın. `ShowDesktop` hedefini ve `My Mac` cihazını seçip `⌘R` ile çalıştırın.
+Open `Package.swift` in Xcode, select the `ShowDesktop` target and `My Mac`, then press `Command-R` to run it.
 
-İlk çalıştırmada macOS, Sistem Ayarları > Gizlilik ve Güvenlik > Erişilebilirlik bölümünden izin vermenizi isteyebilir.
+The first launch may require Accessibility permission in System Settings > Privacy & Security > Accessibility.
 
-## Kullanım
+## Usage
 
-- Menü çubuğu simgesine sol tıklayın: pencereleri küçültür veya geri getirir.
-- `⌥ Space` kısayolunu kullanın.
-- Sağ tıklayarak yönetim menüsünü açın.
+- Left-click the menu bar icon to minimize or restore windows.
+- Press `Option-Space` to run the same toggle.
+- Right-click the icon to open the management menu.
 
-Menüden uygulama hariç tutma, kısayol değiştirme ve girişte başlatma ayarları yapılabilir.
+The menu provides excluded applications, shortcut selection, and launch-at-login settings.
 
-## Test
+## Testing
 
 ```sh
 swift test
 ```
 
-Gerçek pencere davranışı için macOS Accessibility izni verilmiş bir sistemde manuel test yapılmalıdır.
+Manual window behavior testing requires macOS Accessibility permission.
 
-## Release
+## Release Build
 
-Release uygulaması oluşturmak için Developer ID kimliğinizi ortam değişkeni olarak verin:
+Create a signed release application by providing your Developer ID identity through an environment variable:
 
 ```sh
 SHOWDESKTOP_SIGNING_IDENTITY="Developer ID Application: ..." \
@@ -62,15 +62,15 @@ SHOWDESKTOP_BUNDLE_IDENTIFIER="com.example.ShowDesktop" \
 zsh Scripts/build-app.sh
 ```
 
-Notarization ve dağıtım kimlik bilgilerini proje dosyalarına eklemeyin; bunları macOS Keychain veya güvenli CI secret deposunda tutun.
+Never add signing or notarization credentials to project files. Store them in the macOS Keychain or a secure CI secret store.
 
-## Proje yapısı
+## Project Structure
 
-- `Sources/ShowDesktop/`: uygulama kaynak kodu
-- `Tests/ShowDesktopTests/`: otomatik testler
-- `Resources/`: uygulama paket kaynakları ve ikon
-- `Scripts/`: build ve release script'leri
+- `Sources/ShowDesktop/`: application source code
+- `Tests/ShowDesktopTests/`: automated tests
+- `Resources/`: application bundle resources and icon
+- `Scripts/`: build and release scripts
 
-## Lisans
+## License
 
-Bu proje [MIT License](LICENSE) ile lisanslanmıştır.
+This project is licensed under the [MIT License](LICENSE).

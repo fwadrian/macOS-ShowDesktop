@@ -1,0 +1,256 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000010000000000000001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000001 /* AppDelegate.swift */; };
+		A10000010000000000000002 /* HotKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000002 /* HotKeyManager.swift */; };
+		A10000010000000000000003 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000003 /* Preferences.swift */; };
+		A10000010000000000000004 /* RestorationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000004 /* RestorationTracker.swift */; };
+		A10000010000000000000005 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000005 /* WindowManager.swift */; };
+		A10000010000000000000006 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000006 /* main.swift */; };
+		A10000010000000000000007 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20000020000000000000001 /* Assets.xcassets */; };
+		A10000010000000000000008 /* HotKeyConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000030000000000000001 /* HotKeyConfigurationTests.swift */; };
+		A10000010000000000000009 /* PreferencesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000030000000000000002 /* PreferencesTests.swift */; };
+		A1000001000000000000000A /* RestorationTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000030000000000000003 /* RestorationTrackerTests.swift */; };
+		A1000001000000000000000B /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000040000000000000001 /* AppKit.framework */; };
+		A1000001000000000000000C /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000040000000000000002 /* ApplicationServices.framework */; };
+		A1000001000000000000000D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000040000000000000003 /* Carbon.framework */; };
+		A1000001000000000000000E /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000040000000000000004 /* ServiceManagement.framework */; };
+		A1000001000000000000000F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000040000000000000005 /* XCTest.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A30000010000000000000001 /* Test target proxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A40000010000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A50000010000000000000002;
+			remoteInfo = ShowDesktopTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A20000010000000000000001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A20000010000000000000002 /* HotKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyManager.swift; sourceTree = "<group>"; };
+		A20000010000000000000003 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		A20000010000000000000004 /* RestorationTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorationTracker.swift; sourceTree = "<group>"; };
+		A20000010000000000000005 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
+		A20000010000000000000006 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		A20000010000000000000007 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		A20000010000000000000008 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		A20000020000000000000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A20000020000000000000002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A20000020000000000000003 /* AppIconSource.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconSource.png; sourceTree = "<group>"; };
+		A20000030000000000000001 /* HotKeyConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyConfigurationTests.swift; sourceTree = "<group>"; };
+		A20000030000000000000002 /* PreferencesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesTests.swift; sourceTree = "<group>"; };
+		A20000030000000000000003 /* RestorationTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorationTrackerTests.swift; sourceTree = "<group>"; };
+		A20000040000000000000001 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		A20000040000000000000002 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		A20000040000000000000003 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		A20000040000000000000004 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		A20000040000000000000005 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = System/Library/Frameworks/XCTest.framework; sourceTree = SDKROOT; };
+		A20000050000000000000001 /* ShowDesktop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShowDesktop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A20000050000000000000002 /* ShowDesktopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShowDesktopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A60000010000000000000001 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (
+			A1000001000000000000000B /* AppKit.framework in Frameworks */,
+			A1000001000000000000000C /* ApplicationServices.framework in Frameworks */,
+			A1000001000000000000000D /* Carbon.framework in Frameworks */,
+			A1000001000000000000000E /* ServiceManagement.framework in Frameworks */,
+		); runOnlyForDeploymentPostprocessing = 0; };
+		A60000010000000000000002 /* Test Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (
+			A1000001000000000000000F /* XCTest.framework in Frameworks */,
+		); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A70000010000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				A70000010000000000000002 /* Sources */,
+				A70000010000000000000003 /* Tests */,
+				A70000010000000000000004 /* Resources */,
+				A70000010000000000000005 /* Frameworks */,
+				A70000010000000000000006 /* Products */,
+				A20000010000000000000007 /* Package.swift */,
+				A20000010000000000000008 /* README.md */,
+			);
+			sourceTree = "<group>";
+		};
+		A70000010000000000000002 /* Sources */ = {isa = PBXGroup; children = (
+			A20000010000000000000001 /* AppDelegate.swift */,
+			A20000010000000000000002 /* HotKeyManager.swift */,
+			A20000010000000000000003 /* Preferences.swift */,
+			A20000010000000000000004 /* RestorationTracker.swift */,
+			A20000010000000000000005 /* WindowManager.swift */,
+			A20000010000000000000006 /* main.swift */,
+		); path = Sources/ShowDesktop; sourceTree = "<group>"; };
+		A70000010000000000000003 /* Tests */ = {isa = PBXGroup; children = (
+			A20000030000000000000001 /* HotKeyConfigurationTests.swift */,
+			A20000030000000000000002 /* PreferencesTests.swift */,
+			A20000030000000000000003 /* RestorationTrackerTests.swift */,
+		); path = Tests/ShowDesktopTests; sourceTree = "<group>"; };
+		A70000010000000000000004 /* Resources */ = {isa = PBXGroup; children = (
+			A20000020000000000000001 /* Assets.xcassets */,
+			A20000020000000000000002 /* Info.plist */,
+			A20000020000000000000003 /* AppIconSource.png */,
+		); path = Resources; sourceTree = "<group>"; };
+		A70000010000000000000005 /* Frameworks */ = {isa = PBXGroup; children = (
+			A20000040000000000000001 /* AppKit.framework */,
+			A20000040000000000000002 /* ApplicationServices.framework */,
+			A20000040000000000000003 /* Carbon.framework */,
+			A20000040000000000000004 /* ServiceManagement.framework */,
+			A20000040000000000000005 /* XCTest.framework */,
+		); name = Frameworks; sourceTree = "<group>"; };
+		A70000010000000000000006 /* Products */ = {isa = PBXGroup; children = (
+			A20000050000000000000001 /* ShowDesktop.app */,
+			A20000050000000000000002 /* ShowDesktopTests.xctest */,
+		); name = Products; sourceTree = "<group>"; };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A50000010000000000000001 /* ShowDesktop */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A90000010000000000000001 /* Build configuration list for ShowDesktop */;
+			buildPhases = (
+				A60000010000000000000003 /* Sources */,
+				A60000010000000000000001 /* Frameworks */,
+				A60000010000000000000004 /* Resources */,
+			);
+			buildRules = ();
+			dependencies = ();
+			name = ShowDesktop;
+			productName = ShowDesktop;
+			productReference = A20000050000000000000001 /* ShowDesktop.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A50000010000000000000002 /* ShowDesktopTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A90000010000000000000002 /* Build configuration list for ShowDesktopTests */;
+			buildPhases = (
+				A60000010000000000000005 /* Test Sources */,
+				A60000010000000000000002 /* Test Frameworks */,
+			);
+			buildRules = ();
+			dependencies = (
+				A80000010000000000000001 /* ShowDesktop dependency */,
+			);
+			name = ShowDesktopTests;
+			productName = ShowDesktopTests;
+			productReference = A20000050000000000000002 /* ShowDesktopTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A40000010000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = { LastUpgradeCheck = 2700; TargetAttributes = { A50000010000000000000002 = { CreatedOnToolsVersion = 27.0; TestTargetID = A50000010000000000000001; }; }; };
+			buildConfigurationList = A90000010000000000000003 /* Build configuration list for PBXProject */;
+			compatibilityVersion = "Xcode 16.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, Base,);
+			mainGroup = A70000010000000000000001;
+			productRefGroup = A70000010000000000000006 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (A50000010000000000000001, A50000010000000000000002,);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A60000010000000000000004 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (A10000010000000000000007 /* Assets.xcassets in Resources */,); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A60000010000000000000003 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (
+			A10000010000000000000001 /* AppDelegate.swift in Sources */,
+			A10000010000000000000002 /* HotKeyManager.swift in Sources */,
+			A10000010000000000000003 /* Preferences.swift in Sources */,
+			A10000010000000000000004 /* RestorationTracker.swift in Sources */,
+			A10000010000000000000005 /* WindowManager.swift in Sources */,
+			A10000010000000000000006 /* main.swift in Sources */,
+		); runOnlyForDeploymentPostprocessing = 0; };
+		A60000010000000000000005 /* Test Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (
+			A10000010000000000000008 /* HotKeyConfigurationTests.swift in Sources */,
+			A10000010000000000000009 /* PreferencesTests.swift in Sources */,
+			A1000001000000000000000A /* RestorationTrackerTests.swift in Sources */,
+		); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A80000010000000000000001 /* ShowDesktop dependency */ = {isa = PBXTargetDependency; target = A50000010000000000000001 /* ShowDesktop */; targetProxy = A30000010000000000000001 /* Test target proxy */; };
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		AA0000010000000000000001 /* Debug project */ = {isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; SWIFT_VERSION = 5.0; }; name = Debug; };
+		AA0000010000000000000002 /* Release project */ = {isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; SWIFT_VERSION = 5.0; }; name = Release; };
+		AA0000010000000000000003 /* Debug app */ = {isa = XCBuildConfiguration; buildSettings = {
+			ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+			CODE_SIGN_IDENTITY = "Developer ID Application";
+			CODE_SIGN_STYLE = Manual;
+			DEFINES_MODULE = YES;
+			DEVELOPMENT_TEAM = <team ID>;
+			ENABLE_TESTABILITY = YES;
+			INFOPLIST_FILE = Resources/Info.plist;
+			MACOSX_DEPLOYMENT_TARGET = 13.0;
+			PRODUCT_BUNDLE_IDENTIFIER = com.example.ShowDesktop;
+			PRODUCT_NAME = ShowDesktop;
+			SWIFT_VERSION = 5.0;
+		}; name = Debug; };
+		AA0000010000000000000004 /* Release app */ = {isa = XCBuildConfiguration; buildSettings = {
+			ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+			CODE_SIGN_IDENTITY = "Developer ID Application";
+			CODE_SIGN_STYLE = Manual;
+			DEFINES_MODULE = YES;
+			DEVELOPMENT_TEAM = <team ID>;
+			INFOPLIST_FILE = Resources/Info.plist;
+			MACOSX_DEPLOYMENT_TARGET = 13.0;
+			PRODUCT_BUNDLE_IDENTIFIER = com.example.ShowDesktop;
+			PRODUCT_NAME = ShowDesktop;
+			SWIFT_VERSION = 5.0;
+		}; name = Release; };
+		AA0000010000000000000005 /* Debug tests */ = {isa = XCBuildConfiguration; buildSettings = {
+			BUNDLE_LOADER = "$(TEST_HOST)";
+			CODE_SIGN_IDENTITY = "Developer ID Application";
+			CODE_SIGN_STYLE = Manual;
+			DEVELOPMENT_TEAM = <team ID>;
+			MACOSX_DEPLOYMENT_TARGET = 13.0;
+			PRODUCT_BUNDLE_IDENTIFIER = com.example.ShowDesktopTests;
+			PRODUCT_NAME = "$(TARGET_NAME)";
+			SWIFT_ENABLE_EXPLICIT_MODULES = NO;
+			SWIFT_INCLUDE_PATHS = "$(OBJROOT)/ShowDesktop.build/$(CONFIGURATION)/ShowDesktop.build/Objects-normal/$(CURRENT_ARCH)";
+			SWIFT_VERSION = 5.0;
+			TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ShowDesktop.app/Contents/MacOS/ShowDesktop";
+		}; name = Debug; };
+		AA0000010000000000000006 /* Release tests */ = {isa = XCBuildConfiguration; buildSettings = {
+			BUNDLE_LOADER = "$(TEST_HOST)";
+			CODE_SIGN_IDENTITY = "Developer ID Application";
+			CODE_SIGN_STYLE = Manual;
+			DEVELOPMENT_TEAM = <team ID>;
+			MACOSX_DEPLOYMENT_TARGET = 13.0;
+			PRODUCT_BUNDLE_IDENTIFIER = com.example.ShowDesktopTests;
+			PRODUCT_NAME = "$(TARGET_NAME)";
+			SWIFT_ENABLE_EXPLICIT_MODULES = NO;
+			SWIFT_INCLUDE_PATHS = "$(OBJROOT)/ShowDesktop.build/$(CONFIGURATION)/ShowDesktop.build/Objects-normal/$(CURRENT_ARCH)";
+			SWIFT_VERSION = 5.0;
+			TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ShowDesktop.app/Contents/MacOS/ShowDesktop";
+		}; name = Release; };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A90000010000000000000001 /* Build configuration list for ShowDesktop */ = {isa = XCConfigurationList; buildConfigurations = (AA0000010000000000000003, AA0000010000000000000004,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A90000010000000000000002 /* Build configuration list for ShowDesktopTests */ = {isa = XCConfigurationList; buildConfigurations = (AA0000010000000000000005, AA0000010000000000000006,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A90000010000000000000003 /* Build configuration list for PBXProject */ = {isa = XCConfigurationList; buildConfigurations = (AA0000010000000000000001, AA0000010000000000000002,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+	};
+	rootObject = A40000010000000000000001 /* Project object */;
+}

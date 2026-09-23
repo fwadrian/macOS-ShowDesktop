@@ -8,7 +8,7 @@ archive_path="$project_root/dist/ShowDesktop.zip"
 keychain_profile="${SHOWDESKTOP_NOTARY_PROFILE:-ShowDesktopNotary}"
 
 if [[ ! -d "$app_bundle" ]]; then
-    echo "Hata: önce zsh Scripts/build-app.sh çalıştırılmalı." >&2
+    echo "Error: run zsh Scripts/build-app.sh first." >&2
     exit 1
 fi
 
@@ -18,4 +18,4 @@ xcrun stapler staple "$app_bundle"
 xcrun stapler validate "$app_bundle"
 spctl --assess --type execute --verbose=2 "$app_bundle"
 
-echo "Notarization tamamlandı: $app_bundle"
+echo "Notarization complete: $app_bundle"

@@ -35,8 +35,6 @@ final class HotKeyManager {
             GetApplicationEventTarget(),
             { _, _, userData -> OSStatus in
                 guard let userData else { return noErr }
-                // AppDelegate manager'ı yaşam boyu güçlü tuttuğu için burada
-                // unretained erişim güvenlidir; deinit handler'ı önce kaldırır.
                 let manager = Unmanaged<HotKeyManager>
                     .fromOpaque(userData)
                     .takeUnretainedValue()
@@ -50,7 +48,7 @@ final class HotKeyManager {
         )
 
         guard handlerStatus == noErr else {
-            NSLog("ShowDesktop: global event handler kurulamadı (OSStatus: %d)", handlerStatus)
+            NSLog("ShowDesktop: could not install global event handler (OSStatus: %d)", handlerStatus)
             return
         }
 
@@ -63,7 +61,7 @@ final class HotKeyManager {
         unregisterHotKey()
         if register(configuration) { return true }
 
-        NSLog("ShowDesktop: yeni kısayol kaydolmadı; önceki kısayol geri yükleniyor.")
+        NSLog("ShowDesktop: new shortcut could not be registered; restoring the previous shortcut.")
         if let previousConfiguration {
             _ = register(previousConfiguration)
         }
@@ -87,7 +85,7 @@ final class HotKeyManager {
         )
 
         guard hotKeyStatus == noErr else {
-            NSLog("ShowDesktop: global kısayol kaydedilemedi (OSStatus: %d)", hotKeyStatus)
+            NSLog("ShowDesktop: global shortcut could not be registered (OSStatus: %d)", hotKeyStatus)
             isRegistered = false
             return false
         }
