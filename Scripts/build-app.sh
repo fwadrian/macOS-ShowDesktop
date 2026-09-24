@@ -8,7 +8,7 @@ cd "$project_root"
 archive_path="$project_root/dist/ShowDesktop.xcarchive"
 app_bundle="$project_root/dist/ShowDesktop.app"
 signing_identity="${SHOWDESKTOP_SIGNING_IDENTITY:-}"
-bundle_identifier="${SHOWDESKTOP_BUNDLE_IDENTIFIER:-com.example.ShowDesktop}"
+bundle_identifier="${SHOWDESKTOP_BUNDLE_IDENTIFIER:-app.showdesktop.utility}"
 
 if [[ -z "$signing_identity" ]]; then
     echo "Error: SHOWDESKTOP_SIGNING_IDENTITY must be set." >&2

@@ -11,7 +11,7 @@ ShowDesktop is a lightweight macOS menu bar utility that minimizes open applicat
 
 ## Release Status
 
-Version 0.1.1 is a Developer ID-signed universal release candidate. Apple notarization is in progress. Core minimize and restore behavior, shortcut handling, protection of already minimized windows, restoring a window opened from the Dock, and continuing after an application closes have been tested successfully. Ten automated tests pass.
+Version 0.1.2 is a Developer ID-signed and Apple-notarized universal release for Apple Silicon and Intel Macs. Core minimize and restore behavior, shortcut handling, protection of already minimized windows, restoring a window opened from the Dock, and continuing after an application closes have been tested successfully. Ten automated tests pass.
 
 ## Installation
 
@@ -58,9 +58,19 @@ Create a signed release application by providing your Developer ID identity thro
 
 ```sh
 SHOWDESKTOP_SIGNING_IDENTITY="Developer ID Application: ..." \
-SHOWDESKTOP_BUNDLE_IDENTIFIER="com.example.ShowDesktop" \
+SHOWDESKTOP_BUNDLE_IDENTIFIER="app.showdesktop.utility" \
 zsh Scripts/build-app.sh
 ```
+
+Create, notarize, staple, and verify the application and release DMG:
+
+```sh
+SHOWDESKTOP_SIGNING_IDENTITY="Developer ID Application: ..." \
+SHOWDESKTOP_NOTARY_PROFILE="ShowDesktopNotary" \
+zsh Scripts/notarize-app.sh
+```
+
+Published releases include a SHA-256 digest in their release notes. Verify a download with `shasum -a 256 ShowDesktop-*.dmg` before opening it.
 
 Never add signing or notarization credentials to project files. Store them in the macOS Keychain or a secure CI secret store.
 
