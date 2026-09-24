@@ -6,5 +6,3 @@
 - Added a reproducible Developer ID signing and Apple notarization workflow for both the application and DMG.
 - Added Gatekeeper, stapling, signature, and checksum verification to the release process.
 - Added a security policy and published SHA-256 checksum.
-
-This release supersedes 0.1.1, whose tag did not match the published source branch.
